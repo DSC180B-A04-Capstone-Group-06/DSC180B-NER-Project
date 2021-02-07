@@ -2,9 +2,9 @@ import pandas as pd
 import os
 import numpy as np
 
-def generate_df_testdf(path):
-    data_folder = path + '/News Articles/'
-    summary_folder = path + '/Summaries/'
+def generate_df_testdf(path, save_p):
+    data_folder = path + 'News Articles/'
+    summary_folder = path + 'Summaries/'
     entries = os.listdir(data_folder)
 
 
@@ -57,11 +57,11 @@ def generate_df_testdf(path):
             
     total_df.columns = ['text','type','summary','type_code']
     total_df = total_df.reset_index(drop = True)
-    total_df.to_csv(os.path.join('data/temp/all_data.csv'))
+    total_df.to_csv(os.path.join(save_p+'all_data.csv'))
 
     test_df.columns = ['text','type','summary','type_code']
     test_df = test_df.reset_index(drop = True)
     test_df.head()
-    test_df.to_csv(os.path.join('data/temp/test.csv'))
+    test_df.to_csv(os.path.join(save_p +'test.csv'))
 
     return 'Done'
