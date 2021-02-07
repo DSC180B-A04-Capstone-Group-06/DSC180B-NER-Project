@@ -3,6 +3,7 @@ import os
 import numpy as np
 
 def generate_df_testdf(path, save_p):
+    
     data_folder = path + 'News Articles/'
     summary_folder = path + 'Summaries/'
     entries = os.listdir(data_folder)
