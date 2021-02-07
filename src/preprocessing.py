@@ -58,11 +58,11 @@ def generate_df_testdf(path, save_p):
             
     total_df.columns = ['text','type','summary','type_code']
     total_df = total_df.reset_index(drop = True)
-    total_df.to_csv(os.path.join(save_p+'all_data.csv'))
+    total_df.to_csv(os.path.join(save_p+'all_data.csv'), index=False)
 
     test_df.columns = ['text','type','summary','type_code']
     test_df = test_df.reset_index(drop = True)
     test_df.head()
-    test_df.to_csv(os.path.join(save_p +'test.csv'))
+    test_df.to_csv(os.path.join(save_p +'test.csv'), index=False)
 
     return 'Done'
