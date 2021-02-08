@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 from astropy.visualization import hist
 
 def split_into_sentences(text):
+    '''
+    Input text, split it to sentences using regex
+    '''
     alphabets= "([A-Za-z])"
     prefixes = "(Mr|St|Mrs|Ms|Dr)[.]"
     suffixes = "(Inc|Ltd|Jr|Sr|Co)"
@@ -45,6 +48,8 @@ def split_into_sentences(text):
     return sentences
 
 def draw_hist(outdir,pd_series,name,bins_type):
+    '''Draw hist on the given data, and use the bins_type(blocks/freedman). The outliers are moved.
+    '''
     Q1=pd_series.quantile(.25)
     Q3=pd_series.quantile(.75)
     IQR=1.5*(Q3-Q1)
@@ -55,6 +60,9 @@ def draw_hist(outdir,pd_series,name,bins_type):
 
 
 def word_cloud(outdir,df):
+    '''
+    create the word cloud for the given grouped dataframe. 
+    '''
 #     sw = stopwords.words("english")
 #     sw.extend(['said','mr','u','would','could'])
     for i in range(5):
@@ -76,6 +84,9 @@ def word_cloud(outdir,df):
 
 
 def generate_stats(outdir,**kwargs):
+    '''
+    generate stats on the data, including draw hist, barh and word clouds
+    '''
     os.makedirs(outdir, exist_ok=True)
     parent_dir=outdir
     df=pd.read_csv("data/test/test.csv")
