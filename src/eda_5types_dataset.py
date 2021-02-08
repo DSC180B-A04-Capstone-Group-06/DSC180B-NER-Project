@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from nltk.corpus import stopwords
 import pandas as pd
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 from astropy.visualization import hist
 
