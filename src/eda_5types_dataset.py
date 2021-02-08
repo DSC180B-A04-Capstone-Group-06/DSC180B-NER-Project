@@ -77,11 +77,12 @@ def word_cloud(outdir,df):
 
 def generate_stats(outdir,**kwargs):
     os.makedirs(outdir, exist_ok=True)
-    parent_dir=os.getcwd()
-    df=pd.read_csv('data/test/test.csv')
+    parent_dir=outdir
+    df=pd.read_csv("data/test/test.csv")
     hist_1=parent_dir+kwargs['barh_doc']
     df.type_code.value_counts().plot.barh()
     plt.savefig(os.path.join(hist_1, 'barh_doc'))
+    
     summary_series=df.summary.apply(lambda x:len(x.split()))
     hist_2=parent_dir+kwargs['hist_doc_words']
     draw_hist(hist_2,summary_series,'hist_doc_words','freedman')
