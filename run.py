@@ -3,7 +3,8 @@ import os
 import sys
 from src.preprocessing import generate_df_testdf
 import src.baseline as baseline
-
+sys.path.insert(0, 'src')
+from src import eda_5types_dataset as eda
 def main(targets):
 
     
