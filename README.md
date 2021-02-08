@@ -13,9 +13,9 @@ $ python run.py [-test] [-eda] (For example: python run.py -test).
 * ```Tfidf_model.pkl```: the parameter of Tf-Idf model.
 
 ## Group Members
-Rachel Ung
-Siyu Dong
-Yang Li
+* Rachel Ung
+* Siyu Dong
+* Yang Li
 
 
 
