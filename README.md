@@ -1,4 +1,8 @@
 # DSC180B-NER-Project
+This project focuses on the task of document classification using a BBC News Dataset. We will implement various classification models and compare the results to learn about the advantages and shortcomings of each method.
+
+## Dataset Used
+https://www.kaggle.com/pariza/bbc-news-summary
 
 ## Environment Required
 * Please use the docker image: ``` littlestone111/dsc180b-ner-project  ```
@@ -16,6 +20,9 @@ $ python run.py [test] [eda]
 * Rachel Ung
 * Siyu Dong
 * Yang Li
+
+## Our Findings
+[Report TBA]
 
 
 
