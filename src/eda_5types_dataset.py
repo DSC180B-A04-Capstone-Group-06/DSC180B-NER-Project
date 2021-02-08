@@ -1,15 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-
-
-
-# In[15]:
-
-
 import re
 from wordcloud import WordCloud, STOPWORDS 
 import matplotlib.pyplot as plt 
@@ -55,28 +43,6 @@ def split_into_sentences(text):
     sentences = [s.strip() for s in sentences]
     return sentences
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[16]:
-
-
 def draw_hist(outdir,pd_series,name,bins_type):
     Q1=pd_series.quantile(.25)
     Q3=pd_series.quantile(.75)
@@ -85,9 +51,6 @@ def draw_hist(outdir,pd_series,name,bins_type):
     hist(pd_series[pd_series.between(Q1-IQR, Q3+IQR)],bins=bins_type,ax=ax, density=True)
     ax.grid(color='grey', alpha=0.5, linestyle='solid')
     plt.savefig(os.path.join(outdir, name))
-
-
-# In[17]:
 
 
 def word_cloud(outdir,df):
@@ -109,16 +72,12 @@ def word_cloud(outdir,df):
         plt.tight_layout(pad = 0) 
         plt.savefig(os.path.join(outdir, df_by_type.index[i]+'.png'))
 
-        plt.show() 
-
-
-# In[18]:
 
 
 def generate_stats(outdir,**kwargs):
     os.makedirs(outdir, exist_ok=True)
     parent_dir=os.getcwd()
-    df=pd.read_csv('all_data.csv')
+    df=pd.read_csv('data/test/test.csv')
     hist_1=parent_dir+kwargs['barh_doc']
     df.type_code.value_counts().plot.barh()
     plt.savefig(os.path.join(hist_1, 'barh_doc'))
@@ -130,21 +89,11 @@ def generate_stats(outdir,**kwargs):
     df_summary_sentences=df.summary_sentences.explode().reset_index().rename(columns={'index': 'doc'})
     df_summary_sentences=df_summary_sentences.merge(df[['doc','type_code']], on="doc", how = 'left')
     hist_3=parent_dir+kwargs['hist_sentence_doc']
-    draw_hist(hist_2,df.summary_sentences.explode().apply(lambda x: len(x)),'hist_sentence_doc','freedman')
+    draw_hist(hist_3,df.summary_sentences.explode().apply(lambda x: len(x)),'hist_sentence_doc','freedman')
     df_by_type=df[['summary','type']].groupby('type').agg({'summary': ' '.join})
     wc=parent_dir+kwargs['wc']
 
     word_cloud(wc,df_by_type)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
