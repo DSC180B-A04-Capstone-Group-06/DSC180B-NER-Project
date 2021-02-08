@@ -55,13 +55,13 @@ def draw_hist(outdir,pd_series,name,bins_type):
 
 
 def word_cloud(outdir,df):
-    sw = stopwords.words("english")
-    sw.extend(['said','mr','u','would','could'])
+#     sw = stopwords.words("english")
+#     sw.extend(['said','mr','u','would','could'])
     for i in range(5):
         text =df.summary.iloc[i]
         wordcloud  = WordCloud(width = 400, height = 400, 
                         background_color ='white', 
-                        stopwords = sw,
+#                         stopwords = sw,
                         collocations = False,
 
                         min_font_size = 10).generate(text.lower()) 
