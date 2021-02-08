@@ -18,10 +18,9 @@ def main(targets):
         print('==========================================')
         
         
-    eda_crf = json.load(open('config/eda.json'))
     
     
-    
+    eda_config = json.load(open('config/eda.json'))
     if 'eda' in targets:
         eda.generate_stats('test', **eda_config)
         
