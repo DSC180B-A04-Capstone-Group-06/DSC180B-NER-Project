@@ -1,6 +1,5 @@
 data/raw/
 data/temp/
-model/
 .ipynb_checkpoints
 .DS_Store
 .ipynb_checkpoints/
