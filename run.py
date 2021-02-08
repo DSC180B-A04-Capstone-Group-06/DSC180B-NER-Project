@@ -5,7 +5,7 @@ from src.preprocessing import generate_df_testdf
 import src.baseline as baseline
 
 def main(targets):
-    
+
     
     if 'test' in targets:
         test_crf = json.load(open('config/test.json'))
@@ -28,4 +28,3 @@ def main(targets):
         
 if __name__ == '__main__':
     main(sys.argv[1:])
-    main(targets)
