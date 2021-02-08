@@ -66,12 +66,12 @@ def word_cloud(outdir,df):
 
                         min_font_size = 10).generate(text.lower()) 
         plt.figure(figsize = (4,4), facecolor = None) 
-        plt.title(df_by_type.index[i])
+        plt.title(df.index[i])
 
         plt.imshow(wordcloud) 
         plt.axis("off") 
         plt.tight_layout(pad = 0) 
-        plt.savefig(os.path.join(outdir, df_by_type.index[i]+'.png'))
+        plt.savefig(os.path.join(outdir, df.index[i]+'.png'))
 
 
 
