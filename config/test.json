@@ -1,0 +1,4 @@
+{
+    "data_path" : "data/test/test.csv",
+    "save_path" : 'model/'
+}
