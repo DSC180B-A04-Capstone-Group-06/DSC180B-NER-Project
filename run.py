@@ -17,6 +17,9 @@ def main(targets):
         print('==========================================')
         print('Finish test Target')
         print('==========================================')
+    if 'auto' in targets:
+        para = ' '.join([f'{param}={value}' for param, value in json.load(open('config/autophrase_cfg.json')).items()])
+        os.system(f'cd AutoPhrase/ && {para} ./auto_phrase.sh')
         
         
     
