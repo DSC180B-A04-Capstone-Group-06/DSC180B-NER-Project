@@ -2,7 +2,7 @@
     "HIGHLIGHT_MULTI": 0.5, 
     "HIGHLIGHT_SINGLE": 0.8,
     "MIN_SUP": 30,
-    "MODEL": "../model/20news",
-    "RAW_TRAIN": "../data/temp/text.txt",
-    "TEXT_TO_SEG": "../data/temp/text.txt"
+    "MODEL": "../model/tar_0/",
+    "RAW_TRAIN": "../data/temp/tar_0.txt",
+    "TEXT_TO_SEG": "../data/temp/tar_0.txt"
 }
