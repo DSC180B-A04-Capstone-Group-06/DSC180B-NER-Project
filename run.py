@@ -2,7 +2,7 @@ import json
 import os
 import sys
 from src.preprocessing import generate_df_testdf
-import src.baseline as baseline
+import src.model as model
 sys.path.insert(0, 'src')
 from src import eda_5types_dataset as eda
 def main(targets):
@@ -11,8 +11,8 @@ def main(targets):
     if 'test' in targets:
         test_crf = json.load(open('config/test.json'))
         
-        BoG = baseline.build_model(test_crf['data_path'],test_crf['save_path'], model = 'BoG')
-        Tfidf = baseline.build_model(test_crf['data_path'],test_crf['save_path'], model = 'Tfidf')
+        BoG = model.build_model(test_crf['data_path'],test_crf['save_path'], model = 'BoG')
+        Tfidf = model.build_model(test_crf['data_path'],test_crf['save_path'], model = 'Tfidf')
         
         print('==========================================')
         print('Finish test Target')

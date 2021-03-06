@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import SGDClassifier
 from sklearn import metrics
 
 import pandas as pd
@@ -11,23 +12,29 @@ import numpy as np
 import pickle
 
 
-def BoG_Logistic(X,y):
+def BoG_model(X,y, clf = 'Logistic'):
     """
     This function take in training data as X, y. 
-    Then the data will be processed with BagOfWord, then feed into the Logistic Classifier.
+    Then the data will be processed with BagOfWord, then feed into the Logistic / SGD Classifier.
 
     Return:
         pipe: The fitted Logistic Classifier.
     """
-    pipe = Pipeline([
+
+    if clf == 'Logistic':
+        pipe = Pipeline([
            ('BagOfWord', CountVectorizer()),
-           ('clasiffier', LogisticRegression(max_iter = 1000))
+           ('clasiffier', LogisticRegression())
            ])
-           
+    if clf == 'SVM':
+        pipe = Pipeline([
+           ('BagOfWord', CountVectorizer()),
+           ('clasiffier', SGDClassifier())
+           ])
     pipe.fit(X, y)
     return pipe
 
-def Tfidf_Logistic(X,y):
+def Tfidf_model(X,y, clf = 'Logistic'):
 
     """
     This function take in training data as X, y. 
@@ -36,18 +43,24 @@ def Tfidf_Logistic(X,y):
     Return:
         pipe: The fitted Logistic Classifier.
     """
-
-    pipe = Pipeline([
-           ('BagOfWord', CountVectorizer()),
-           ('TfIdf',TfidfTransformer()),
-           ('clasiffier', LogisticRegression(max_iter = 1000))
-           ])
-           
+    if clf == 'Logistic':
+        pipe = Pipeline([
+            ('BagOfWord', CountVectorizer()),
+            ('TfIdf',TfidfTransformer()),
+            ('clasiffier', LogisticRegression())
+            ])
+    if clf == 'SVM':
+        pipe = Pipeline([
+            ('BagOfWord', CountVectorizer()),
+            ('TfIdf',TfidfTransformer()),
+            ('clasiffier', SGDClassifier())
+            ])
     pipe.fit(X, y)
     return pipe
 
 
-def build_model(path,save_path, model ='BoG', train_size = 0.6):
+
+def build_model(path,save_path, model ='BoG', clf = 'Logistic', train_size = 0.6):
     """
     This function will take in the data set, and split the train/validation/test with 60%/20%/20%.
     Also build the model based on the choice of model.
@@ -71,14 +84,14 @@ def build_model(path,save_path, model ='BoG', train_size = 0.6):
     
     # Training and saving the BoG model
     if model =='BoG':
-        clf = BoG_Logistic(X_train,y_train)
+        clf = BoG_model(X_train,y_train, clf)
         model_name = "BoG_model.pkl"
         with open(save_path + model_name, 'wb') as file:
             pickle.dump(model, file)
     
     # Training and saving the Tf-Idf model
     if model =='Tfidf':
-        clf = Tfidf_Logistic(X_train,y_train)
+        clf = BoG_model(X_train,y_train, clf)
         model_name = "Tfidf_model.pkl"
         with open(save_path + model_name, 'wb') as file:
             pickle.dump(model, file)
