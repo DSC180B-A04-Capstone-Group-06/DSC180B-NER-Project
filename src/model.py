@@ -8,7 +8,7 @@ from sklearn import metrics
 import pandas as pd
 import numpy as np
 
-def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False):
+def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False,uni=None,ne=None):
     """
     This function take in training data as X, y. 
     Then the data will be processed with BagOfWord, then feed into the Logistic / SGD Classifier.
@@ -34,6 +34,11 @@ def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False):
         if combining == False:
             vocab_lst = vocab
             
+        if uni:
+            text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
+            count_vect = CountVectorizer().fit([text_for_vect]) 
+            vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
+        
         if clf == 'Logistic':
             pipe = Pipeline([
                ('BagOfWord', CountVectorizer(vocabulary =vocab_lst)),
@@ -47,12 +52,12 @@ def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False):
     pipe.fit(X, y)
     return pipe
 
-def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False):
+def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False, uni=None,ne=None):
 
     """
     This function take in training data as X, y. 
+    ne is the pandas series of the Name Entity column.
     Then the data will be processed with BagOfWord and Tf-Idf, then feed into the Logistic / SGD Classifier.
-
     Return:
         pipe: The fitted Logistic Classifier.
     """
@@ -76,6 +81,11 @@ def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False):
         if combining == False:
             
             vocab_lst = vocab
+            
+        if uni:
+            text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
+            count_vect = CountVectorizer().fit([text_for_vect]) 
+            vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
             
         if clf == 'Logistic':
             pipe = Pipeline([
