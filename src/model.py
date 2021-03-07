@@ -10,7 +10,7 @@ import numpy as np
 
 text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
 count_vect = CountVectorizer().fit([text_for_vect]) 
-vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
+vocab_lst = np.unique(list(count_vect.vocabulary_))
 
 def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False):
     """
