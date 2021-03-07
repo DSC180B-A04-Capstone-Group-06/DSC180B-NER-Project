@@ -12,7 +12,7 @@ import numpy as np
 import pickle
 
 
-def BoG_model(X,y, clf = 'Logistic'):
+def BoG_model(X,y, clf = 'Logistic', vocab = None):
     """
     This function take in training data as X, y. 
     Then the data will be processed with BagOfWord, then feed into the Logistic / SGD Classifier.
@@ -20,21 +20,32 @@ def BoG_model(X,y, clf = 'Logistic'):
     Return:
         pipe: The fitted Logistic Classifier.
     """
-
-    if clf == 'Logistic':
-        pipe = Pipeline([
-           ('BagOfWord', CountVectorizer()),
-           ('clasiffier', LogisticRegression())
-           ])
-    if clf == 'SVM':
-        pipe = Pipeline([
-           ('BagOfWord', CountVectorizer()),
-           ('clasiffier', SGDClassifier())
-           ])
+    if vocab == None:
+        if clf == 'Logistic':
+            pipe = Pipeline([
+               ('BagOfWord', CountVectorizer()),
+               ('clasiffier', LogisticRegression())
+               ])
+        if clf == 'SVM':
+            pipe = Pipeline([
+               ('BagOfWord', CountVectorizer()),
+               ('clasiffier', SGDClassifier())
+               ])
+    else:
+        if clf == 'Logistic':
+            pipe = Pipeline([
+               ('BagOfWord', CountVectorizer(vocabulary =vocab)),
+               ('clasiffier', LogisticRegression())
+               ])
+        if clf == 'SVM':
+            pipe = Pipeline([
+               ('BagOfWord', CountVectorizer(vocabulary =vocab)),
+               ('clasiffier', SGDClassifier())
+               ])
     pipe.fit(X, y)
     return pipe
 
-def Tfidf_model(X,y, clf = 'Logistic'):
+def Tfidf_model(X,y, clf = 'Logistic', vocab = None):
 
     """
     This function take in training data as X, y. 
@@ -43,18 +54,32 @@ def Tfidf_model(X,y, clf = 'Logistic'):
     Return:
         pipe: The fitted Logistic Classifier.
     """
-    if clf == 'Logistic':
-        pipe = Pipeline([
-            ('BagOfWord', CountVectorizer()),
-            ('TfIdf',TfidfTransformer()),
-            ('clasiffier', LogisticRegression())
-            ])
-    if clf == 'SVM':
-        pipe = Pipeline([
-            ('BagOfWord', CountVectorizer()),
-            ('TfIdf',TfidfTransformer()),
-            ('clasiffier', SGDClassifier())
-            ])
+    if vocab == None:
+        if clf == 'Logistic':
+            pipe = Pipeline([
+                ('BagOfWord', CountVectorizer()),
+                ('TfIdf',TfidfTransformer()),
+                ('clasiffier', LogisticRegression())
+                ])
+        if clf == 'SVM':
+            pipe = Pipeline([
+                ('BagOfWord', CountVectorizer()),
+                ('TfIdf',TfidfTransformer()),
+                ('clasiffier', SGDClassifier())
+                ])
+    else:
+        if clf == 'Logistic':
+            pipe = Pipeline([
+                ('BagOfWord', CountVectorizer(vocabulary =vocab)),
+                ('TfIdf',TfidfTransformer()),
+                ('clasiffier', LogisticRegression())
+                ])
+        if clf == 'SVM':
+            pipe = Pipeline([
+                ('BagOfWord', CountVectorizer(vocabulary =vocab)),
+                ('TfIdf',TfidfTransformer()),
+                ('clasiffier', SGDClassifier())
+                ])
     pipe.fit(X, y)
     return pipe
 
