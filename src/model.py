@@ -8,7 +8,11 @@ from sklearn import metrics
 import pandas as pd
 import numpy as np
 
-def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False,uni=None,ne=None):
+text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
+count_vect = CountVectorizer().fit([text_for_vect]) 
+vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
+
+def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False):
     """
     This function take in training data as X, y. 
     Then the data will be processed with BagOfWord, then feed into the Logistic / SGD Classifier.
@@ -33,11 +37,6 @@ def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False,uni=None,ne
             vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
         if combining == False:
             vocab_lst = vocab
-            
-        if uni:
-            text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
-            count_vect = CountVectorizer().fit([text_for_vect]) 
-            vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
         
         if clf == 'Logistic':
             pipe = Pipeline([
@@ -52,7 +51,7 @@ def BoG_model(X,y, clf = 'Logistic', vocab = None, combining = False,uni=None,ne
     pipe.fit(X, y)
     return pipe
 
-def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False, uni=None,ne=None):
+def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False):
 
     """
     This function take in training data as X, y. 
@@ -81,11 +80,6 @@ def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False, uni=None
         if combining == False:
             
             vocab_lst = vocab
-            
-        if uni:
-            text_for_vect = ' '.join(ne.apply(lambda x: str(x)))
-            count_vect = CountVectorizer().fit([text_for_vect]) 
-            vocab_lst = np.unique(list(count_vect.vocabulary_) + list(vocab))
             
         if clf == 'Logistic':
             pipe = Pipeline([
