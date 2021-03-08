@@ -13,7 +13,9 @@ import pickle
 
 
 def main(targets):
-    
+    # Load the AutoPhrase module
+    os.system('git submodule init && git submodule update')
+
     if 'all' in targets:
         targets = 'all preprocessing autophrase model'
         para = json.load(open('config/all_cfg.json'))
@@ -73,12 +75,11 @@ def main(targets):
 
         filename = para["model_save"]
         with open(filename + 'model.pkl', 'wb') as file:
-            pickle.dump(model, file)
+            pickle.dump(clf, file)
 
 
         
     
-        
         
 if __name__ == '__main__':
     main(sys.argv[1:])
