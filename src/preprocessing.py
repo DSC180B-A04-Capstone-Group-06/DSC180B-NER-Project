@@ -79,6 +79,10 @@ def bbc_preprocessing(path, save_p):
     print('Done')
 
 def news_preprocessing(save_p):
+    """
+    Preprocessing function for 20 news group. It will generate a text file for Autophrase tool to extract quality phrases.
+    """
+
     newsgroups_train = fetch_20newsgroups(subset='train')
     news_df = pd.DataFrame.from_dict(newsgroups_train,'index').T
     with open(save_p +"/20news.txt", 'w', encoding='utf-8') as f:

@@ -127,6 +127,12 @@ def load_bbc_news(path):
     return bbc_X_train, bbc_X_test,bbc_X_val, bbc_y_train, bbc_y_test, bbc_y_val
 
 def load_20_news_test(n = None):
+
+    '''
+    load the 20 news group and train, validation, test split the data set for training.
+    Input:
+    n: The number of instances for test target.
+    '''
     if n is None:
         newsgroups_train = fetch_20newsgroups(subset='train')
         newsgroups_test = fetch_20newsgroups(subset='test')
