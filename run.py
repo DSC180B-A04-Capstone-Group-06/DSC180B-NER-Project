@@ -1,32 +1,75 @@
 import json
 import os
 import sys
-from src.preprocessing import generate_df_testdf
+import numpy as np
+from src.preprocessing import bbc_preprocessing, news_preprocessing
 import src.model as model
 sys.path.insert(0, 'src')
 from src import ner_eda as eda
-def main(targets):
+import src.utils as utils
 
+
+
+def main(targets):
     
+    if 'all' in targets:
+        targets = 'all preprocessing autophrase model'
+        para = json.load(open('config/all_cfg.json'))
+        
     if 'test' in targets:
-        test_crf = json.load(open('config/test.json'))
+        targets = 'test preprocessing autophrase model'
+        para = json.load(open('config/all_cfg.json'))
+
+    if 'preprocessing' in targets:
+        print("Preprocessing 20 News Dataset")
+        os.makedirs('data/temp',exist_ok=True)
+        news_preprocessing('data/temp')
         
-        BoG = model.build_model(test_crf['data_path'],test_crf['save_path'], model = 'BoG')
-        Tfidf = model.build_model(test_crf['data_path'],test_crf['save_path'], model = 'Tfidf')
+    if 'autophrase' in targets:
+        print("Running AutoPhrase")
+        auto_para = ' '.join([f'{param}={value}' for param, value in json.load(open('config/autophrase_cfg.json')).items()])
+        os.system(f'cd AutoPhrase/ && {auto_para} ./auto_phrase.sh')
+        os.system(f'cd ..')
         
-        print('==========================================')
-        print('Finish test Target')
-        print('==========================================')
-    if 'auto' in targets:
-        para = ' '.join([f'{param}={value}' for param, value in json.load(open('config/autophrase_cfg.json')).items()])
-        os.system(f'cd AutoPhrase/ && {para} ./auto_phrase.sh')
         
+        
+    if 'model' in targets:
+        if 'all' in targets:
+            print("Load Data")
+            newsgroups_train_X,newsgroups_test_X,newsgroups_val_X, newsgroups_train_y,newsgroups_test_y,newsgroups_val_y = utils.load_20_news()
+        if 'test' in targets:
+            print("Load Data")
+            newsgroups_train_X,newsgroups_test_X,newsgroups_val_X, newsgroups_train_y,newsgroups_test_y,newsgroups_val_y = utils.load_20_news_test(500)
+        
+        print("Build the model")
+        if para["feature"] == "all":
+            autophrase = utils.phrase_preprocess(para['autophrase_result'])
+            ner = utils.ner_preprocess(para["ner_result"])
+            vocab_lst = autophrase + ner
+        elif para["feature"] == "ner":
+            vocab_lst = utils.ner_preprocess(para["ner_result"])
+        elif para["feature"] == "autophrase":
+            vocab_lst = utils.phrase_preprocess(para['autophrase_result'])
+
+        vocab_lst =np.unique(vocab_lst)
+        combining = False
+        if combining == "True":
+            combining = True
+        
+        clf = model.build_model(newsgroups_train_X, newsgroups_train_y,model = para['model'], vectorizing = para['vectorizing'], vocab_lst = vocab_lst, combining = combining)
+        print('=========================================================')
+        print("Evaluate on Validation Dataset")
+        val_pred = clf.predict(newsgroups_val_X) 
+        utils.evaluate(newsgroups_val_y, val_pred)
+        print('=========================================================')
+        
+        print('=========================================================')
+        print("Evaluate on Test Dataset")
+        val_pred = clf.predict(newsgroups_test_X) 
+        utils.evaluate(newsgroups_test_y, val_pred)
+        print('=========================================================')
         
     
-    
-    eda_config = json.load(open('config/eda.json'))
-    if 'eda' in targets:
-        eda.generate_stats('test', **eda_config)
         
         
 if __name__ == '__main__':

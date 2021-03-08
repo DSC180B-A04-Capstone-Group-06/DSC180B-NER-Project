@@ -2,8 +2,11 @@ import pandas as pd
 import os
 import numpy as np
 
-def generate_df_testdf(path, save_p):
+from sklearn.datasets import fetch_20newsgroups
+import src.utils  as utils
 
+
+def bbc_preprocessing(path, save_p):
 
     # set Data Path and type of news list
     data_folder = path + 'News Articles/'
@@ -64,7 +67,7 @@ def generate_df_testdf(path, save_p):
     # Save the complete data csv.
     total_df.columns = ['text','type','summary','type_code']
     total_df = total_df.reset_index(drop = True)
-    total_df.to_csv(os.path.join(save_p+'all_data.csv'), index=False)
+    total_df.to_csv(os.path.join(save_p+'bbc_data.csv'), index=False)
 
 
     # Save the test.csv.
@@ -73,4 +76,18 @@ def generate_df_testdf(path, save_p):
     test_df.head()
     test_df.to_csv(os.path.join(save_p +'test.csv'), index=False)
 
-    return 'Done'
+    print('Done')
+
+def news_preprocessing(save_p):
+    newsgroups_train = fetch_20newsgroups(subset='train')
+    news_df = pd.DataFrame.from_dict(newsgroups_train,'index').T
+    with open(save_p +"/20news.txt", 'w', encoding='utf-8') as f:
+        f.write('\n'.join(news_df.data.apply(lambda x: utils.clean_text(x)+ '.')))
+    
+    
+    print('=========================================================')  
+    print('20 News Group Dataset Ready for Running AutoPhrase..')
+    print('=========================================================')
+    
+    
+    

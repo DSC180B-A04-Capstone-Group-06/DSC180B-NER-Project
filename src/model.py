@@ -5,6 +5,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import SGDClassifier
 from sklearn import metrics
 
+
+import src.utils as utils
 import pandas as pd
 import numpy as np
 
@@ -92,3 +94,12 @@ def Tfidf_model(X,y, clf = 'Logistic', vocab = None, combining = False):
                 ])
     pipe.fit(X, y)
     return pipe
+
+def build_model(X,y,model = 'SVM', vectorizing = 'tfidf', vocab_lst = None, combining = False):
+    
+    if vectorizing == 'tfidf':
+        model = Tfidf_model(X,y, clf = model, vocab = vocab_lst, combining = combining)
+    else:
+        model = BoG_model(X,y, clf = model, vocab = vocab_lst, combining = combining)
+        
+    return model
