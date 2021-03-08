@@ -25,7 +25,7 @@ $ python run.py [test] [eda]
 * Yang Li
 
 ## Our Findings
-[Report TBA]
+The BERT classification on the 5 news BBC datasetdoes not over perform any of our implemented mod-els.  From our result table, we observed that all of ourmodels have performance on F1 and accuracy around.95,  which  means  all  of  them  are  useful  and  power-ful.    The  best  of  them  is  the  SVM+ALL(TF-IDF),which uses the vocab from both NER result and Au-toPhrase result. This is expected, because the name en-tities and high quality phrases are actually different indifferent fields, which makes them become good fea-tures for prediction.   For the 20 News group dataset,the SVM+ALL(TF-IDF) also over performed the othermodels at F1 and Accuracy being .84. Considering theclasses are huge(20), this result is useful and powerful.Applying our best model on the 5 news BBC datasetwe got F1 at 0.9525, and accuracy at 9528, for the 20news group we got F1 at .8463 and accuracy at .8478.
 
 
 
