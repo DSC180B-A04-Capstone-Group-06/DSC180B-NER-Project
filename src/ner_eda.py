@@ -11,6 +11,9 @@ from string import punctuation
 from collections import Counter
 
 def draw_hist(outdir,pd_series,name,bins_type):
+    '''
+    Draw histogram without outliers
+    '''
     Q1=pd_series.quantile(.25)
     Q3=pd_series.quantile(.75)
     IQR=1.5*(Q3-Q1)
@@ -21,6 +24,9 @@ def draw_hist(outdir,pd_series,name,bins_type):
 
 
 def draw_barh(outdir,df):
+    '''
+    Draw barh graph on the ner tag.
+    '''
     ner_tag = ['O', 'B-PER', 'I-PER', 'B-ORG', 'I-ORG', 'B-LOC', 'I-LOC', 'B-MISC', 'I-MISC']
     tag_count = DefaultDict(int)
     for i in df.ner_tags:
@@ -33,6 +39,9 @@ def draw_barh(outdir,df):
 
 
 def phrase_cloud(outdir,df):
+    '''
+    create phrase cloud using the phrases extracted from dataset.
+    '''
     token_collection={0:[],1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[]}
     for l,i in enumerate(df.ner_tags):
         phrase=''
@@ -78,6 +87,9 @@ def phrase_cloud(outdir,df):
         plt.show() 
         
 def generate_stats(outdir,**kwargs):
+    '''
+    Generate all the plots for eda
+    '''
     os.makedirs(outdir, exist_ok=True)
     parent_dir=os.getcwd()
     dataset = load_dataset("conll2003")
