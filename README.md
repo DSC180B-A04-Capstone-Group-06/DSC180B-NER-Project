@@ -16,7 +16,7 @@ $ launch-180.sh -i littlestone111/dsc180b-ner-project -G [group]
 $ python run.py [all] [preprocessing] [autophrase] [model] [test]
 ```
 ```all```:          target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.</br>
-```preprocessing``` target will preprocess 20 news group data for AutoPhrase, so that they can be used for training the model.</br>
+```preprocessing```: target will preprocess 20 news group data for AutoPhrase, so that they can be used for training the model.</br>
 ```autophrase```:   target will run Professor Shang's Autophrase model to extract quality phrases from the dataset.</br>
 ```model```:        target will build the SVM+ALL+TF-IDF combined vocab list model for 20 news group dataset. </br>
 ```test``` :        target will build the Tf-Idf models on the small test dataset and save the models to the model folder.
