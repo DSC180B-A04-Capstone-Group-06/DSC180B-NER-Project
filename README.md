@@ -17,7 +17,7 @@ $ python run.py [all]
 ```
 ```$ python run.py test``` will build the Bag-Of-Word and Tf-Idf models on the small test dataset and save the models to the model folder.
 * ```BoG_model.pkl```: the parameter of Bag-Of-Word model.
-* ```Tfidf_model.pkl```: the parameter of Tf-Idf model.</br>
+* ```Tfidf_model.pkl```: the parameter of Tf-Idf model.
 </br>
 ```all``` target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.</br>
 ```preprocessing``` target will preprocess the NE, BBC news data and 20 news group data, so that they can be used for training the model.</br>
