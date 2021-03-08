@@ -5,19 +5,24 @@ This project focuses on the task of document classification using a BBC News Dat
 * https://dsc180b-a04-capstone-group-06.github.io/News-Classification-Webpage/
 
 ## Datasets Used
-* BBC news: https://www.kaggle.com/pariza/bbc-news-summary. Download this dataset</br>
-* 20 news group: http://qwone.com/~jason/20Newsgroups/. This dataset is fetch by using sklearn package
+* BBC news: https://www.kaggle.com/pariza/bbc-news-summary Download this dataset</br>
+* 20 news group: http://qwone.com/~jason/20Newsgroups/ This dataset is fetch by using sklearn package
 ## Environment Required
 * Please use the docker image: ``` littlestone111/dsc180b-ner-project  ```
 
 ## Run
 ```
 $ launch-180.sh -i littlestone111/dsc180b-ner-project -G [group]
-$ python run.py [test] [eda] 
+$ python run.py [all] 
 ```
 ```$ python run.py test``` will build the Bag-Of-Word and Tf-Idf models on the small test dataset and save the models to the model folder.
 * ```BoG_model.pkl```: the parameter of Bag-Of-Word model.
 * ```Tfidf_model.pkl```: the parameter of Tf-Idf model.
+```all``` target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.
+```preprocessing``` target will preprocess the NE, BBC news data and 20 news group data, so that they can be used for training the model.
+```autophrase```target will run Professor Shang's Autophrase model to extract quality phrases from the dataset.
+```model```target will build the SVM+TF-IDF combined vocab list model for both datasets. 
+```eda```target will create the eda plots for the dataset.
 
 ## Group Members
 * Rachel Ung
