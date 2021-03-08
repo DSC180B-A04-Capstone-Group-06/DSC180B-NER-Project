@@ -17,11 +17,11 @@ $ python run.py [all]
 ```
 ```$ python run.py test``` will build the Bag-Of-Word and Tf-Idf models on the small test dataset and save the models to the model folder.
 * ```BoG_model.pkl```: the parameter of Bag-Of-Word model.
-* ```Tfidf_model.pkl```: the parameter of Tf-Idf model.
-```all``` target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.
-```preprocessing``` target will preprocess the NE, BBC news data and 20 news group data, so that they can be used for training the model.
-```autophrase```target will run Professor Shang's Autophrase model to extract quality phrases from the dataset.
-```model```target will build the SVM+TF-IDF combined vocab list model for both datasets. 
+* ```Tfidf_model.pkl```: the parameter of Tf-Idf model.</br>
+```all``` target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.</br>
+```preprocessing``` target will preprocess the NE, BBC news data and 20 news group data, so that they can be used for training the model.</br>
+```autophrase```target will run Professor Shang's Autophrase model to extract quality phrases from the dataset.</br>
+```model```target will build the SVM+TF-IDF combined vocab list model for both datasets. </br>
 ```eda```target will create the eda plots for the dataset.
 
 ## Group Members
