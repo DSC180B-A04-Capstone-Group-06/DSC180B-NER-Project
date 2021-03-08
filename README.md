@@ -5,8 +5,8 @@ This project focuses on the task of document classification using a BBC News Dat
 * https://dsc180b-a04-capstone-group-06.github.io/News-Classification-Webpage/
 
 ## Datasets Used
-*BBC news: https://www.kaggle.com/pariza/bbc-news-summary</br>
-*20 news group: http://qwone.com/~jason/20Newsgroups/
+* BBC news: https://www.kaggle.com/pariza/bbc-news-summary</br>
+* 20 news group: http://qwone.com/~jason/20Newsgroups/
 ## Environment Required
 * Please use the docker image: ``` littlestone111/dsc180b-ner-project  ```
 
