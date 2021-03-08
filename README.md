@@ -23,7 +23,7 @@ $ python run.py [all] [preprocessing] [autophrase] [model] [test]
 ```model```:        target will build the SVM+ALL+TF-IDF combined vocab list model for 20 news group dataset. </br>
 
 </br>
-Output:
+Output: <br>
 * ```model.pkl```: the parameter of the final model.
 
 ## Group Members
