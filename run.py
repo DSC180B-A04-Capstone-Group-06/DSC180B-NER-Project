@@ -7,6 +7,8 @@ import src.model as model
 sys.path.insert(0, 'src')
 from src import ner_eda as eda
 import src.utils as utils
+import pickle
+
 
 
 
@@ -68,6 +70,12 @@ def main(targets):
         val_pred = clf.predict(newsgroups_test_X) 
         utils.evaluate(newsgroups_test_y, val_pred)
         print('=========================================================')
+
+        filename = para["model_save"]
+        with open(filename + 'model.pkl', 'wb') as file:
+            pickle.dump(model, file)
+
+
         
     
         

@@ -4,6 +4,7 @@
     "model": "SVM",
     "feature":"all",
     "combining": "True",
-    "vectorizing" : "tfidf"
+    "vectorizing" : "tfidf",
+    "model_save":"model/"
     
 }
