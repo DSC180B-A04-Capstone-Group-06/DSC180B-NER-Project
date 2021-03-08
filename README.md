@@ -1,5 +1,5 @@
 # DSC180B-NER-Project
-This project focuses on the task of document classification using a BBC News Dataset. We will implement various classification models and compare the results to learn about the advantages and shortcomings of each method.
+This project focuses on the task of document classification using a BBC News Dataset and a 20 News Group Dataset. We will implement various classification models and compare the results to learn about the advantages and shortcomings of each method.
 
 ## Webpage
 * https://dsc180b-a04-capstone-group-06.github.io/News-Classification-Webpage/
