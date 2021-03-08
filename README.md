@@ -13,7 +13,7 @@ This project focuses on the task of document classification using a BBC News Dat
 ## Run
 ```
 $ launch-180.sh -i littlestone111/dsc180b-ner-project -G [group]
-$ python run.py [all] 
+$ python run.py [all] [preprocessing] [autophrase] [model]
 ```
 ```all``` target will run everthing inlcuded in project, and return the final prediction on the test dataset for document classification.</br>
 ```preprocessing``` target will preprocess 20 news group data for AutoPhrase, so that they can be used for training the model.</br>
